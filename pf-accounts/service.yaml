@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: accounts
+  namespace: develop
+  labels:
+    app: accounts
+    service: accounts
+spec:
+  ports:
+  - port: 4000
+    name: http
+  selector:
+    app: accounts
