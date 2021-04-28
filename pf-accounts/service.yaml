@@ -1,11 +1,26 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: accounts
-  namespace: develop
+  name: accounts-rollouts-canary
   labels:
     app: accounts
-    service: accounts
+    service: accounts-rollouts-canary
+spec:
+  ports:
+  - port: 4000
+    name: http
+  selector:
+    app: accounts
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: accounts-rollouts-stable
+  labels:
+    app: accounts
+    service: accounts-rollouts-stable
 spec:
   ports:
   - port: 4000

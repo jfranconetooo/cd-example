@@ -1,11 +1,22 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
-  name: accounts
-  labels:
-    app: accounts
+  name: accounts-rollouts
 spec:
   replicas: 1
+  strategy:
+    canary:
+      canaryService: accounts-rollouts-canary
+      stableService: accounts-rollouts-stable
+      trafficRouting:
+        istio:
+          virtualService:
+            name: meshvs
+            routes:
+            - accounts # At least one route is required
+      steps:
+      - setWeight: 5
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: accounts
@@ -13,13 +24,15 @@ spec:
     metadata:
       labels:
         app: accounts
+        istio-injection: enabled
     spec:
       containers:
       - name: accounts
         image: docker.io/jfranconeto/accounts:1.0
-        imagePullPolicy: Always
         ports:
-        - containerPort: 4000
+        - name: http
+          containerPort: 4000
+          protocol: TCP
         env:
         - name: API_PORT
           value: "4000"
