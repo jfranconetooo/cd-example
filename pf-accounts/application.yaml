@@ -16,6 +16,8 @@ spec:
             - accounts # At least one route is required
       steps:
       - setWeight: 5
+      - pause:
+          duration: 1h
   revisionHistoryLimit: 2
   selector:
     matchLabels:
