@@ -8,6 +8,13 @@ spec:
     canary:
       canaryService: accounts-rollouts-canary
       stableService: accounts-rollouts-stable
+      analysis:
+        templates:
+        - templateName: success-rate
+        startingStep: 2 # delay starting analysis run until setWeight: 20%
+        args:
+        - name: service-name
+          value: accounts-rollouts-canary.develop.svc.cluster.local
       trafficRouting:
         istio:
           virtualService:
@@ -23,7 +30,6 @@ spec:
       - pause: {duration: 5m}
       - setWeight: 80
       - pause: {duration: 5m}
-      - setWeight: 100
   revisionHistoryLimit: 2
   selector:
     matchLabels:
