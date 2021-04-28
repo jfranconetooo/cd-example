@@ -2,7 +2,6 @@ apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: accounts-authorization-policy
-  namespace: develop
 spec:
   selector:
     matchLabels:
