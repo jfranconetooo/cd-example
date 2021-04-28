@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: accounts
-        image: docker.io/jfranconeto/accounts:latest
+        image: docker.io/jfranconeto/accounts:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 4000
