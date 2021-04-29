@@ -5,6 +5,7 @@ metadata:
 spec:
   hosts:
   - "*"
+  - "example.com"
   gateways:
   - kenlo-gateway
   http:
