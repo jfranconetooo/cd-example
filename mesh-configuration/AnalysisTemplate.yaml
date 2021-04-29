@@ -11,7 +11,7 @@ spec:
     count: 2
     # NOTE: prometheus queries return results in the form of a vector.
     # So it is common to access the index 0 of the returned array to obtain the value
-    successCondition: result[0] == NaN || result[0] >= 0.95
+    successCondition: isNaN(result[0]) || result[0] >= 0.95
     failureLimit: 3
     provider:
       prometheus:
