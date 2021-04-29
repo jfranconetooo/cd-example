@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: accounts
-        image: docker.io/jfranconeto/accounts:2.0
+        image: docker.io/jfranconeto/accounts:1.0
         ports:
         - name: http
           containerPort: 4000
