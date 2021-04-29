@@ -11,7 +11,7 @@ spec:
     count: 4
     # NOTE: prometheus queries return results in the form of a vector.
     # So it is common to access the index 0 of the returned array to obtain the value
-    successCondition: result[0] == [NaN] || result == [NaN] || result[0] >= 0.95
+    successCondition: result[0] >= 0.95
     failureLimit: 2
     provider:
       prometheus:
@@ -19,7 +19,7 @@ spec:
         query: |
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}",response_code!~"5.*"}[5m]
-          )) / 
+          ) > 0) / 
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}"}[5m]
-          ))
+          ) > 0)
